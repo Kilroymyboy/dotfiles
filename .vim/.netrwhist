@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/Users/bradritten/Documents/vrify-web/hooks/useThreeDViewer'
+let g:netrw_dirhist_8='/Users/bradritten/Documents/vrify-web'
+let g:netrw_dirhist_7='/Users/bradritten/Documents/poc-drill-data'
+let g:netrw_dirhist_6='/Users/bradritten/Documents/poc-drill-data/public/sample-data'
+let g:netrw_dirhist_5='/Users/bradritten/Documents/vrify-web/pages/decks/_deckId'
+let g:netrw_dirhist_4='/Users/bradritten/Documents/vrify-web/lib/three-d-resources'
+let g:netrw_dirhist_3='/Users/bradritten/.vim/UltiSnips'
+let g:netrw_dirhist_2='/Users/bradritten/Documents/vrify-web/hooks/dynamic-model'
+let g:netrw_dirhist_1='/Users/bradritten/Documents/vrify-web/pages/decks/_deckId'
+let g:netrw_dirhist_0='/Users/bradritten/Documents/vrify-web/.vim'

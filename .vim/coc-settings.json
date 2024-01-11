@@ -1,0 +1,7 @@
+{
+  "snippets.ultisnips.pythonPrompt": false,
+  "eslint.autoFixOnSave": true,
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "prettier.disableLanguages": [],
+  "prettier.eslintIntegration": true
+}
