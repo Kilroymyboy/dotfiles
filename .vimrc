@@ -1,5 +1,3 @@
-
-"
 " A (not so) minimal vimrc.
 "
 
@@ -12,13 +10,14 @@ let mapleader=' ' " Map leader key to be space
 filetype plugin indent on  " Load plugins according to detected filetype.
 syntax enable                  " Enable syntax highlighting.
 
+set termguicolors
 set noswapfile
 set autoindent             " Indent according to previous line.
 set expandtab              " Use spaces instead of tabs.
 set softtabstop =2         " Tab key indents by 4 spaces.
 set shiftwidth  =2         " >> indents by 4 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
-set so=15                  " Keeps cursor close to center of screen
+set so=10                  " Keeps cursor close to center of screen
 set number                 " Numbers on side
 set nuw=4                  " adds a bit of space to the left of numbers
 set history=1000           " longer undo
@@ -124,6 +123,8 @@ Plug 'neoclide/coc.nvim', { 'do': 'npm install -g vls', 'branch': 'release' } " 
                 \ '@yaegassy/coc-volar',
                 \ '@yaegassy/coc-volar-tools',
                 \ 'coc-css',
+                \ 'coc-tsserver',
+                \ 'coc-pyright',
                 \ 'coc-eslint',
                 \ 'coc-git',
                 \ 'coc-html',
@@ -132,7 +133,6 @@ Plug 'neoclide/coc.nvim', { 'do': 'npm install -g vls', 'branch': 'release' } " 
                 \ '@yaegassy/coc-tailwindcss3',
                 \ 'coc-ultisnips',
                 \]
-Plug 'posva/vim-vue'
 " Plug 'BurntSushi/ripgrep'
 Plug 'scrooloose/nerdtree' " {{{
 	let NERDTreeAutoDeleteBuffer=1
@@ -144,6 +144,7 @@ Plug 'scrooloose/nerdtree' " {{{
 	nnoremap <Leader>nt :NERDTreeToggle<CR>
 " }}}
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'vimwiki/vimwiki'
 Plug 'markonm/traces.vim'
 Plug 'junegunn/fzf.vim'" {{{
 	nnoremap <silent> <C-t>     :Files<CR>
@@ -184,13 +185,19 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
-" nnoremap <Enter> A<Enter><Esc>k$
+
+
+" Vimwiki stuff
+nnoremap <silent> <Leader>ww :vsplit<CR>:VimwikiIndex<CR>
+autocmd FileType vimwiki setlocal conceallevel=2
+
+
 
 " You can revert the settings after the call like so:
 "   filetype indent off   " Disable file-type-specific indentation
 "   syntax off            " Disable syntax highlighting
-colorscheme Apprentice
+colorscheme apprentice
 :hi CocErrorHighlight cterm=underline ctermfg=9
 :hi Normal ctermbg=16 guibg=#111111
 :hi LineNr ctermbg=16 guibg=#111111
-:hi Function guifg=blue guibg=NONE gui=NONE cterm=NONE
+" :hi Function guifg=blue guibg=NONE gui=NONE cterm=NONE

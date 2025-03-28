@@ -3,5 +3,11 @@
   "eslint.autoFixOnSave": true,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
   "prettier.disableLanguages": [],
-  "prettier.eslintIntegration": true
+  "prettier.eslintIntegration": true,
+  "python.pythonPath": "python3",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.completeFunctionParens": true
 }
