@@ -1,13 +1,22 @@
 {
   "snippets.ultisnips.pythonPrompt": false,
   "eslint.autoFixOnSave": true,
-  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "coc.preferences.formatOnSave": true,
   "prettier.disableLanguages": [],
   "prettier.eslintIntegration": true,
   "python.pythonPath": "python3",
+  "python.analysis.extraPaths": ["./"],
   "python.analysis.typeCheckingMode": "basic",
   "python.analysis.autoSearchPaths": true,
   "python.analysis.useLibraryCodeForTypes": true,
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.analysis.typeCheckingMode": "basic",
   "python.analysis.diagnosticMode": "workspace",
-  "python.analysis.completeFunctionParens": true
+  "python.analysis.completeFunctionParens": true,
+  "coc.source.OmniSharp.enable": true,
+  "coc.source.OmniSharp.triggerCharacters": [".", ":"],
+  "coc.source.OmniSharp.priority": 9,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

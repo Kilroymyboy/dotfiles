@@ -7,7 +7,7 @@
 set nocompatible
 let mapleader=' ' " Map leader key to be space
 
-filetype plugin indent on  " Load plugins according to detected filetype.
+filetype indent plugin on         " Load plugins according to detected filetype.
 syntax enable                  " Enable syntax highlighting.
 
 set termguicolors
@@ -98,6 +98,7 @@ Plug 'robertmeta/nofrils' " {{{
 	let g:nofrils_heavycomments=1
 	let g:nofrils_strbackgrounds=1
 " }}}
+Plug 'joshuavial/aider.nvim'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -145,6 +146,7 @@ Plug 'scrooloose/nerdtree' " {{{
 " }}}
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'vimwiki/vimwiki'
+Plug 'itchyny/calendar.vim'
 Plug 'markonm/traces.vim'
 Plug 'junegunn/fzf.vim'" {{{
 	nnoremap <silent> <C-t>     :Files<CR>
@@ -152,6 +154,13 @@ Plug 'junegunn/fzf.vim'" {{{
 	nnoremap <Leader>rgg     :Rg<Space>
         xnoremap <silent> <Leader>rg    y:Rg <C-R>"<CR>
 " }}}
+"
+Plug 'dense-analysis/ale'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'tpope/vim-dispatch'
+
+Plug 'vuciv/golf'
+
 " inoremap <silent><expr> <TAB>
 "       \ coc#pum#visible() ? coc#pum#next(1) :
 "       \ <SID>check_back_space() ? "\<TAB>" :
@@ -187,11 +196,22 @@ function! ShowDocumentation()
 endfunction
 
 
-" Vimwiki stuff
-nnoremap <silent> <Leader>ww :vsplit<CR>:VimwikiIndex<CR>
-autocmd FileType vimwiki setlocal conceallevel=2
 
+let g:ale_linters = {
+\ 'cs': ['OmniSharp']
+\}
+let g:OmniSharp_server_use_mono = 1
+" let g:ale_virtualtext_cursor = 1
 
+autocmd FileType cs nnoremap <buffer> <Leader>gd :OmniSharpGotoDefinition<CR>
+autocmd FileType cs nnoremap <buffer> <Leader>gr :OmniSharpFindReferences<CR>
+autocmd FileType cs nnoremap <buffer> <Leader>gi :OmniSharpFindImplementations<CR>
+autocmd FileType cs nnoremap <buffer> <Leader>rn :OmniSharpRename<CR>
+autocmd BufWritePre *.cs :OmniSharpCodeFormat
+
+" let g:OmniSharp_highlight_types = 0
+" let g:OmniSharp_diagnostic_virtual_text = 0
+" let g:OmniSharp_diagnostic_enable = 0
 
 " You can revert the settings after the call like so:
 "   filetype indent off   " Disable file-type-specific indentation
@@ -200,4 +220,51 @@ colorscheme apprentice
 :hi CocErrorHighlight cterm=underline ctermfg=9
 :hi Normal ctermbg=16 guibg=#111111
 :hi LineNr ctermbg=16 guibg=#111111
+
+:hi Title ctermfg=LightRed cterm=bold
+
+" Vimwiki stuff
+nnoremap <silent> <Leader>ww :vsplit<CR>:VimwikiIndex<CR>
+let g:vimwiki_folding = 'syntax'
+augroup VimwikiFolds
+  autocmd!
+  autocmd BufReadPost *.wiki if expand('%:t') ==# 'index.wiki' |
+        \ setlocal foldlevel=0 |
+        \ else |
+        \ setlocal foldlevel=99 |
+        \ endif
+augroup END
+
+:hi VimwikiHeader1 ctermfg=Red        cterm=bold
+:hi VimwikiHeader2 ctermfg=LightYellow cterm=bold
+:hi VimwikiHeader3 ctermfg=LightGreen  cterm=bold
+:hi VimwikiHeader4 ctermfg=LightBlue   cterm=bold
+:hi VimwikiHeader5 ctermfg=LightMagenta cterm=bold
+:hi VimwikiHeader6 ctermfg=Cyan        cterm=bold
+
+:hi VimwikiBold    cterm=bold ctermfg=15
+:hi VimwikiItalic  cterm=italic
+:hi VimwikiLink    ctermfg=DarkCyan    cterm=underline
+:hi VimwikiCode    ctermfg=White       cterm=bold
+:hi VimwikiPre     ctermfg=Yellow      cterm=NONE
+" Internal links (default Vimwiki pages)
+:hi VimwikiLink        ctermfg=Cyan     cterm=underline
+autocmd FileType vimwiki setlocal conceallevel=2 concealcursor=nv
+source ~/.cache/calendar.vim/credentials.vim
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
+" augroup VimwikiConcealExternal
+"   autocmd!
+"   autocmd FileType vimwiki syntax match VimwikiExternalLink /\[\[[^|]*|[^]]*\]\]/ conceal cchar=🔗
+"   autocmd FileType vimwiki highlight VimwikiExternalLink ctermfg=Magenta cterm=underline
+" augroup END
+augroup VimwikiConcealExternal
+  autocmd!
+  autocmd FileType vimwiki syntax match VimwikiExternalLink /\[\[[^|]*|[^]]*\]\]/ conceal cchar=🔗
+  autocmd FileType vimwiki highlight VimwikiExternalLink ctermfg=Magenta cterm=underline
+augroup END
+
+
+
 " :hi Function guifg=blue guibg=NONE gui=NONE cterm=NONE
